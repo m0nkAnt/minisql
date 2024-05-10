@@ -83,7 +83,7 @@ Page *BufferPoolManager::NewPage(page_id_t &page_id) {
   size_t i;
   frame_id_t frame_id;
   for ( i = 0; i < pool_size_; i++) {
-    if (pages_[i].pin_count_ != 0) {
+    if (pages_[i].pin_count_ == 0) {  // -----应该是==叭，全不为0的时候才能在最后退出）
       break;
     }
   }
@@ -156,7 +156,7 @@ bool BufferPoolManager::UnpinPage(page_id_t page_id, bool is_dirty) {
     return true;
   }
 
-  if(is_dirty) {
+  if(is_dirty) { // 不是很懂这里is_dirty的作用-----Zhu's Question
     P->is_dirty_ = true;
   }
 

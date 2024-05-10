@@ -178,6 +178,7 @@ bool BufferPoolManager::FlushPage(page_id_t page_id) {
   P->is_dirty_ = false;
   latch_.unlock();
   return true;
+
 }
 
 page_id_t BufferPoolManager::AllocatePage() {

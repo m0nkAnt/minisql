@@ -8,26 +8,31 @@ LRUReplacer::~LRUReplacer() = default;
  * TODO: Student Implement
  */
 bool LRUReplacer::Victim(frame_id_t *frame_id) {
-  return false;
+  if(lru_list.empty()) {
+    return false;
+  }
+  frame_id_t victim_id = lru_list.back();
+  lru_list.pop_back();
+  *frame_id = victim_id;
+  return true;
 }
 
 /**
  * TODO: Student Implement
  */
 void LRUReplacer::Pin(frame_id_t frame_id) {
-
+  lru_list.remove(frame_id);
 }
-
 /**
  * TODO: Student Implement
  */
 void LRUReplacer::Unpin(frame_id_t frame_id) {
-
+  lru_list.push_front(frame_id);
 }
 
 /**
  * TODO: Student Implement
  */
 size_t LRUReplacer::Size() {
-  return 0;
+  return lru_list.size();
 }

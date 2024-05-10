@@ -27,7 +27,7 @@ BufferPoolManager::~BufferPoolManager() {
  */
 Page *BufferPoolManager::FetchPage(page_id_t page_id) {
   // 1.     Search the page table for the requested page (P).
-  frame_id_t frame_id;
+  frame_id_t frame_id; // frame_id表示内存中的pages数组的下标
   Page *P;
   unordered_map<page_id_t, frame_id_t>::iterator P2F;
   if (page_table_.count(page_id) != 0) { // Check if page exists

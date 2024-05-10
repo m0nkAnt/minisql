@@ -109,12 +109,13 @@ Page *BufferPoolManager::NewPage(page_id_t &page_id) {
   P->ResetMemory();
   P->page_id_ = AllocatePage();
   page_table_.insert(P->page_id_, frame_id);
-  if(P->is_dirty_) {
+  if(P->is_dirty_) {  //-----这里为啥会dirty----Zhu's Question
     disk_manager_->WritePage(P->page_id_, P->data_);
     P->is_dirty_ = false;
   }
   P->pin_count_ = 1;
   // 4.   Set the page ID output parameter. Return a pointer to P.
+  page_id = P->page_id_;
   return P;
 
 }
